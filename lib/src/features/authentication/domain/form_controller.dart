@@ -38,7 +38,6 @@ class EmailController extends StateNotifier<FieldItemState> {
     } else {
       state = state.copyWith(fieldText: value, errorText: 'Invalid email');
     }
-    print(state.fieldText);
   }
 }
 
@@ -59,7 +58,6 @@ class PasswordController extends StateNotifier<FieldItemState> {
     } else {
       state = state.copyWith(fieldText: value, errorText: 'Invalid password');
     }
-    print(state.fieldText);
   }
 }
 
@@ -77,7 +75,6 @@ class UsernameController extends StateNotifier<FieldItemState> {
     } else {
       state = state.copyWith(fieldText: value, errorText: 'Invalid username');
     }
-    print(state.fieldText);
   }
 }
 

@@ -1,6 +1,7 @@
 // ignore_for_file: always_specify_types
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 import '../../error_handling/logger.dart';
 import '../../error_handling/snackbar_controller.dart';
@@ -46,10 +47,11 @@ class WeatherController extends StateNotifier<WeatherState> {
 
   final WeatherRepository _repository;
   final SnackbarController _snackbarController;
+  final Logger _logger = getLogger(WeatherController);
 
-  Future<void> getCurrentWeahter(final String city) async {
+  Future<void> getCurrentWeather(final String city) async {
+    _logger.d('getCurrentWeather - call');
     state = state.copyWith(weather: const AsyncValue<Weather>.loading());
-    _snackbarController.setMessage('loading current', SnackbarType.success);
 
     final WeatherEntity response = await _repository.fetchCurrentWeather(city);
 
@@ -59,8 +61,8 @@ class WeatherController extends StateNotifier<WeatherState> {
   }
 
   Future<void> get5DaysForecast(final String city) async {
+    _logger.d('get5DaysForecast - call');
     state = state.copyWith(forecast: const AsyncValue<List<Weather>>.loading());
-    _snackbarController.setMessage('loading 5days', SnackbarType.success);
 
     final List<WeatherEntity> response =
         await _repository.fetch5DaysForecast(city);

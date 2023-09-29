@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:logger/logger.dart';
 
 import '../../../utils/colors.dart';
+import '../../core/error_handling/logger.dart';
 import '../../core/error_handling/snackbar_controller.dart';
 import '../domain/auth_controller.dart';
 import '../domain/form_controller.dart';
@@ -20,6 +22,7 @@ class SignUpViewState extends ConsumerState<SignUpView> {
   late final TextEditingController _usernameController;
   late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
+  late final Logger _logger;
 
   @override
   void initState() {
@@ -29,6 +32,7 @@ class SignUpViewState extends ConsumerState<SignUpView> {
     _usernameController = TextEditingController();
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
+    _logger = getLogger(SignUpView);
   }
 
   @override
@@ -41,6 +45,7 @@ class SignUpViewState extends ConsumerState<SignUpView> {
 
   @override
   Widget build(final BuildContext context) {
+    _logger.d('build');
     snackbarDisplayer(context, ref);
     return Scaffold(
       body: Padding(
@@ -63,7 +68,6 @@ class SignUpViewState extends ConsumerState<SignUpView> {
                 final WidgetRef ref,
                 final Widget? child,
               ) {
-                print('textfield reb');
                 return TextField(
                   controller: _usernameController,
                   decoration: InputDecoration(
@@ -91,7 +95,6 @@ class SignUpViewState extends ConsumerState<SignUpView> {
                 final WidgetRef ref,
                 final Widget? child,
               ) {
-                print('textfield reb');
                 return TextField(
                   controller: _emailController,
                   decoration: InputDecoration(
@@ -129,28 +132,27 @@ class SignUpViewState extends ConsumerState<SignUpView> {
                         (final FieldItemState value) => value.errorText,
                       ),
                     ),
-                    suffixIcon: Container(
-                      padding: const EdgeInsets.only(right: 8),
-                      child: IconButton(
-                        onPressed: () {
-                          setState(() => isNotVisible = !isNotVisible);
-                        },
-                        splashColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        icon: Icon(
-                          !isNotVisible
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                          color: detailColor,
-                        ),
-                      ),
-                    ),
+                    suffixIcon: child,
                   ),
                   onChanged: (final String value) => ref
                       .read(passwordControllerProvider.notifier)
                       .onPasswordChange(value),
                 );
               },
+              child: Container(
+                padding: const EdgeInsets.only(right: 8),
+                child: IconButton(
+                  onPressed: () {
+                    setState(() => isNotVisible = !isNotVisible);
+                  },
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  icon: Icon(
+                    !isNotVisible ? Icons.visibility_off : Icons.visibility,
+                    color: detailColor,
+                  ),
+                ),
+              ),
             ),
             const SizedBox(
               height: 26,
@@ -171,8 +173,9 @@ class SignUpViewState extends ConsumerState<SignUpView> {
                     isFieldsEnabled = true;
                   });
                 },
-                child: const Text('Sign Up'),
+                child: child,
               ),
+              child: const Text('Sign Up'),
             ),
             const SizedBox(
               height: 16,
@@ -198,10 +201,11 @@ class SignUpViewState extends ConsumerState<SignUpView> {
                         ..invalidate(emailControllerProvider)
                         ..invalidate(passwordControllerProvider);
                     },
-                    child: const Text(
-                      'Sign In',
-                      style: TextStyle(fontSize: 16),
-                    ),
+                    child: child!,
+                  ),
+                  child: const Text(
+                    'Sign In',
+                    style: TextStyle(fontSize: 16),
                   ),
                 ),
               ],

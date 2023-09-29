@@ -25,6 +25,11 @@ class WeatherRepository {
         'appid': openWeatherKey,
       },
     );
+
+    if (response.data == null) {
+      throw Exception('null data');
+    }
+
     return WeatherEntity.fromData(response.data!);
   }
 

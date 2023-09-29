@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:logger/logger.dart';
 
 import '../../../utils/colors.dart';
+import '../../core/error_handling/logger.dart';
 import '../../core/error_handling/snackbar_controller.dart';
 import '../domain/auth_controller.dart';
 import '../domain/form_controller.dart';
@@ -19,6 +21,7 @@ class SignInViewState extends ConsumerState<SignInView> {
   late bool isFieldsEnabled;
   late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
+  late final Logger _logger;
 
   @override
   void initState() {
@@ -27,6 +30,7 @@ class SignInViewState extends ConsumerState<SignInView> {
     isFieldsEnabled = true;
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
+    _logger = getLogger(SignInView);
   }
 
   @override
@@ -39,7 +43,7 @@ class SignInViewState extends ConsumerState<SignInView> {
   @override
   Widget build(final BuildContext context) {
     snackbarDisplayer(context, ref);
-    print('rebuuuuuiild');
+    _logger.d('build');
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -100,28 +104,27 @@ class SignInViewState extends ConsumerState<SignInView> {
                         (final FieldItemState value) => value.errorText,
                       ),
                     ),
-                    suffixIcon: Container(
-                      padding: const EdgeInsets.only(right: 8),
-                      child: IconButton(
-                        onPressed: () {
-                          setState(() => isNotVisible = !isNotVisible);
-                        },
-                        splashColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        icon: Icon(
-                          !isNotVisible
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                          color: detailColor,
-                        ),
-                      ),
-                    ),
+                    suffixIcon: child,
                   ),
                   onChanged: (final String value) => ref
                       .read(passwordControllerProvider.notifier)
                       .onPasswordChange(value),
                 );
               },
+              child: Container(
+                padding: const EdgeInsets.only(right: 8),
+                child: IconButton(
+                  onPressed: () {
+                    setState(() => isNotVisible = !isNotVisible);
+                  },
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  icon: Icon(
+                    !isNotVisible ? Icons.visibility_off : Icons.visibility,
+                    color: detailColor,
+                  ),
+                ),
+              ),
             ),
             const SizedBox(
               height: 26,
@@ -142,8 +145,9 @@ class SignInViewState extends ConsumerState<SignInView> {
                     isFieldsEnabled = true;
                   });
                 },
-                child: const Text('Sign In'),
+                child: child,
               ),
+              child: const Text('Sign In'),
             ),
             const SizedBox(
               height: 16,
@@ -180,10 +184,11 @@ class SignInViewState extends ConsumerState<SignInView> {
                         ..invalidate(emailControllerProvider)
                         ..invalidate(passwordControllerProvider);
                     },
-                    child: const Text(
-                      'Create one',
-                      style: TextStyle(fontSize: 16),
-                    ),
+                    child: child!,
+                  ),
+                  child: const Text(
+                    'Create one',
+                    style: TextStyle(fontSize: 16),
                   ),
                 ),
               ],

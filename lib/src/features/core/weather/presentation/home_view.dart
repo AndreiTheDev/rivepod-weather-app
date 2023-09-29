@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:logger/logger.dart';
 
 import '../../error_handling/logger.dart';
 import '../../error_handling/snackbar_controller.dart';
@@ -18,17 +19,25 @@ class HomeView extends ConsumerStatefulWidget {
 class _HomeViewState extends ConsumerState<HomeView> {
   late bool isForecast;
   late final TextEditingController controller;
+  late final Logger _logger;
 
   @override
   void initState() {
     super.initState();
     isForecast = false;
     controller = TextEditingController();
+    _logger = getLogger(HomeView);
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(final BuildContext context) {
-    getLogger(HomeView).d('build');
+    _logger.d('build');
     snackbarDisplayer(context, ref);
 
     ref
@@ -83,7 +92,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
                   if (!isForecast) {
                     await ref
                         .read(weatherControllerProvider.notifier)
-                        .getCurrentWeahter(controller.text);
+                        .getCurrentWeather(controller.text);
                   } else {
                     await ref
                         .read(weatherControllerProvider.notifier)

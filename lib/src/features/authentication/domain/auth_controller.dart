@@ -34,7 +34,7 @@ class AuthState with ChangeNotifier {
     required final AuthUserState state,
     final UserModel? user,
   }) {
-    logger.d('setAuthState - call - $state');
+    logger.d('setAuthState - updatedState - $state');
     this.user = user;
     authUserState = state;
     notifyListeners();

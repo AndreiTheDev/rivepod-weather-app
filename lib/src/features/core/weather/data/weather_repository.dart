@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../utils/api_keys.dart';
 import '../../error_handling/logger.dart';
-import 'weather_entity.dart';
+import 'entities/weather_entity.dart';
 
 final weatherRepositoryProvider = Provider<WeatherRepository>(
   (final ref) => WeatherRepository(),

@@ -26,4 +26,12 @@ class UserModel {
       username: entity.username,
     );
   }
+
+  Map<String, dynamic> toDatabase() {
+    return <String, dynamic>{
+      'uid': uid,
+      'email': email,
+      'username': username,
+    };
+  }
 }

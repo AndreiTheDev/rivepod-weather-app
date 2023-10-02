@@ -48,6 +48,7 @@ class SignUpViewState extends ConsumerState<SignUpView> {
     _logger.d('build');
     snackbarDisplayer(context, ref);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(

@@ -42,3 +42,8 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Ignores
+lib/src/utils/api_keys.dart
+assets/designs
+firebase_emulator_data

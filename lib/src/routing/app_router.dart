@@ -17,10 +17,17 @@ final routerProvider = Provider<GoRouter>((final ref) {
   final AuthState authState = ref.watch(
     authControllerProvider.select((final value) => value.authState),
   );
+  final GlobalKey<NavigatorState> rootNavigatorKey =
+      GlobalKey<NavigatorState>();
+  final GlobalKey<NavigatorState> shellNavigatorKey =
+      GlobalKey<NavigatorState>();
+
   return GoRouter(
     initialLocation: '/',
+    navigatorKey: rootNavigatorKey,
     routes: <RouteBase>[
       ShellRoute(
+        navigatorKey: shellNavigatorKey,
         builder: (
           final BuildContext context,
           final GoRouterState state,
@@ -30,6 +37,7 @@ final routerProvider = Provider<GoRouter>((final ref) {
         routes: <GoRoute>[
           GoRoute(
             path: '/',
+            parentNavigatorKey: shellNavigatorKey,
             routes: <GoRoute>[
               GoRoute(
                 path: 'weather',
@@ -56,6 +64,7 @@ final routerProvider = Provider<GoRouter>((final ref) {
           ),
           GoRoute(
             path: '/friends',
+            parentNavigatorKey: shellNavigatorKey,
             pageBuilder:
                 (final BuildContext context, final GoRouterState state) =>
                     const NoTransitionPage<FriendsView>(
@@ -64,6 +73,7 @@ final routerProvider = Provider<GoRouter>((final ref) {
           ),
           GoRoute(
             path: '/searches',
+            parentNavigatorKey: shellNavigatorKey,
             pageBuilder:
                 (final BuildContext context, final GoRouterState state) =>
                     const NoTransitionPage<SearchesView>(
@@ -72,6 +82,7 @@ final routerProvider = Provider<GoRouter>((final ref) {
           ),
           GoRoute(
             path: '/settings',
+            parentNavigatorKey: shellNavigatorKey,
             pageBuilder:
                 (final BuildContext context, final GoRouterState state) =>
                     const NoTransitionPage<SettingsView>(

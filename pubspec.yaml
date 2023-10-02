@@ -42,4 +42,4 @@ flutter:
       - asset: assets/fonts/OpenSans-SemiBold.ttf
 
   assets:
-    - assets/icons/
+    - assets/weather_icons/

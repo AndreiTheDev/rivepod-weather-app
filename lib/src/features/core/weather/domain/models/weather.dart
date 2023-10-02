@@ -1,7 +1,7 @@
-import '../../data/weather_entity.dart';
+import '../../data/entities/weather_entity.dart';
 
-class Weather {
-  Weather({
+class WeatherModel {
+  WeatherModel({
     required this.city,
     required this.temp,
     required this.feelsLike,
@@ -13,8 +13,8 @@ class Weather {
     required this.iconId,
   });
 
-  factory Weather.fromEntity(final WeatherEntity entity) {
-    return Weather(
+  factory WeatherModel.fromEntity(final WeatherEntity entity) {
+    return WeatherModel(
       city: entity.city,
       temp: entity.temp,
       feelsLike: entity.feelsLike,

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../../../utils/colors.dart' as colors;
+import '../../../../utility_providers/weather_icon_provider.dart';
 import '../../../domain/models/weather.dart';
 
 class ResultCard extends StatelessWidget {
   const ResultCard({required this.weather, super.key});
 
-  final Weather weather;
+  final WeatherModel weather;
 
   @override
   Widget build(final BuildContext context) {
@@ -63,9 +65,12 @@ class ResultCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
-                SvgPicture.asset(
-                  'assets/icons/Weather_Icons-Broken-Clouds.svg',
-                  height: 120,
+                Consumer(
+                  builder: (final context, final ref, final child) =>
+                      SvgPicture.asset(
+                    ref.read(weatherIconProvider(weather.iconId)),
+                    height: 120,
+                  ),
                 ),
                 Text(
                   weather.description,

@@ -9,7 +9,7 @@ import 'result_row.dart';
 class ResultContainer extends StatelessWidget {
   const ResultContainer({required this.weather, super.key});
 
-  final Weather weather;
+  final WeatherModel weather;
 
   @override
   Widget build(final BuildContext context) {

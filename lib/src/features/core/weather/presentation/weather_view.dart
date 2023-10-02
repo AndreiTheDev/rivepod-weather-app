@@ -3,9 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../common_widgets/custom_app_bar.dart';
 import '../../error_handling/logger.dart';
-import '../domain/current_weather_controller.dart';
 import '../domain/models/weather.dart';
-// import 'widgets/result_card.dart';
+import '../domain/weather_controller.dart';
 import 'widgets/weather_result/result_container.dart';
 import 'widgets/weather_result/result_container_loading.dart';
 
@@ -33,13 +32,13 @@ class WeatherView extends StatelessWidget {
               final WidgetRef ref,
               final Widget? child,
             ) {
-              final AsyncValue<Weather?> weather = ref.watch(
+              final AsyncValue<WeatherModel?> weather = ref.watch(
                 weatherControllerProvider
                     .select((final WeatherState value) => value.weather),
               );
 
               return weather.when(
-                data: (final Weather? data) {
+                data: (final WeatherModel? data) {
                   if (data != null) {
                     return ResultContainer(weather: data);
                   }
@@ -47,7 +46,17 @@ class WeatherView extends StatelessWidget {
                 },
                 loading: ResultContainerLoading.new,
                 error: (final Object error, final StackTrace stackTrace) =>
-                    const Text('error'),
+                    Column(
+                  children: [
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 3,
+                    ),
+                    const Text(
+                      'Wrong city name.',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ],
+                ),
               );
             },
           ),

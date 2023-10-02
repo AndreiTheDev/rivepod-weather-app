@@ -8,7 +8,7 @@ import '../weather_result/result_container.dart';
 class ForecastContainer extends StatefulWidget {
   const ForecastContainer({required this.weatherList, super.key});
 
-  final List<Weather> weatherList;
+  final List<WeatherModel> weatherList;
 
   @override
   State<ForecastContainer> createState() => _ForecastContainerState();
@@ -50,7 +50,7 @@ class _ForecastContainerState extends State<ForecastContainer> {
             padding: const EdgeInsets.only(left: 28, right: 28),
             child: Row(
               children: <ResultContainer>[
-                for (final Weather weather in widget.weatherList)
+                for (final WeatherModel weather in widget.weatherList)
                   ResultContainer(weather: weather),
               ],
             ),

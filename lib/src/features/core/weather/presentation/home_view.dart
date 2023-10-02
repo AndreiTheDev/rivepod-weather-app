@@ -5,8 +5,8 @@ import 'package:logger/logger.dart';
 
 import '../../error_handling/logger.dart';
 import '../../error_handling/snackbar_controller.dart';
-import '../domain/current_weather_controller.dart';
 import '../domain/models/weather.dart';
+import '../domain/weather_controller.dart';
 import 'widgets/suffix_icon.dart';
 
 class HomeView extends ConsumerStatefulWidget {
@@ -44,8 +44,8 @@ class _HomeViewState extends ConsumerState<HomeView> {
       ..listen(
           weatherControllerProvider
               .select((final WeatherState value) => value.weather), (
-        final AsyncValue<Weather?>? previous,
-        final AsyncValue<Weather?> next,
+        final AsyncValue<WeatherModel?>? previous,
+        final AsyncValue<WeatherModel?> next,
       ) async {
         if (next.isLoading) {
           await context.push('/weather');
@@ -54,8 +54,8 @@ class _HomeViewState extends ConsumerState<HomeView> {
       ..listen(
           weatherControllerProvider
               .select((final WeatherState value) => value.forecast), (
-        final AsyncValue<List<Weather>?>? previous,
-        final AsyncValue<List<Weather>?> next,
+        final AsyncValue<List<WeatherModel>?>? previous,
+        final AsyncValue<List<WeatherModel>?> next,
       ) async {
         if (next.isLoading) {
           await context.push('/forecast');
@@ -68,6 +68,13 @@ class _HomeViewState extends ConsumerState<HomeView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Text(
+              isForecast ? 'Forecast Weather' : 'Current Weather',
+              style: const TextStyle(fontSize: 40),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
             TextField(
               controller: controller,
               decoration: InputDecoration(

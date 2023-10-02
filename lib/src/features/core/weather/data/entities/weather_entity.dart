@@ -43,4 +43,17 @@ class WeatherEntity {
       iconId: data['weather'][0]['id'] as int,
     );
   }
+
+  Map<String, dynamic> toDatabase() {
+    return <String, dynamic>{
+      'city': city,
+      'temp': temp,
+      'feelsLike': feelsLike,
+      'pressure': pressure,
+      'humidity': humidity,
+      'windSpeed': windSpeed,
+      'description': description,
+      'iconId': iconId,
+    };
+  }
 }

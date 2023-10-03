@@ -10,45 +10,45 @@ class AppException implements Exception {
 
   factory AppException.getFirebaseException(final String code) {
     switch (code) {
-      case emailExists:
+      case emailExistsCode:
         return AppException(
-          code: emailExists,
+          code: emailExistsCode,
           message: emailExistsMessage,
         );
-      case internalError:
+      case internalErrorCode:
         return AppException(
-          code: internalError,
+          code: internalErrorCode,
           message: internalErrorMessage,
         );
-      case invalidCredential:
+      case invalidCredentialCode:
         return AppException(
-          code: invalidCredential,
+          code: invalidCredentialCode,
           message: invalidCredentialMessage,
         );
-      case invalidPassword:
+      case invalidPasswordCode:
         return AppException(
-          code: invalidPassword,
+          code: invalidPasswordCode,
           message: invalidPasswordMessage,
         );
-      case userDisabled:
+      case userDisabledCode:
         return AppException(
-          code: userDisabled,
+          code: userDisabledCode,
           message: userDisabledMessage,
         );
-      case userNotFound:
+      case userNotFoundCode:
         return AppException(
-          code: userNotFound,
+          code: userNotFoundCode,
           message: userNotFoundMessage,
         );
-      case wrongPassword:
+      case wrongPasswordCode:
         return AppException(
-          code: wrongPassword,
+          code: wrongPasswordCode,
           message: wrongPasswordMessage,
         );
-      case userCancel:
+      case userCancelCode:
         return AppException(
-          code: userCancel,
-          message: userCancel,
+          code: userCancelCode,
+          message: userCancelCode,
         );
       case noUserDataCode:
         return AppException(

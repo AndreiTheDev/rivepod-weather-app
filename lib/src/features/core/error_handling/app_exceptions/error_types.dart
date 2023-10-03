@@ -7,14 +7,15 @@ const String nullUserCode = 'null-user';
 //Firebase
 const String noUserDataCode = 'no-user-data';
 const String userNotExistsCode = 'user-not-exists';
-const String emailExists = 'email-already-exists';
-const String internalError = 'internal-error';
-const String invalidCredential = 'invalid-credential';
-const String invalidPassword = 'invalid-password';
-const String userDisabled = 'user-disabled';
-const String userNotFound = 'user-not-found';
-const String wrongPassword = 'wrong-password';
-const String userCancel = 'user-cancel';
+const String emailExistsCode = 'email-already-exists';
+const String internalErrorCode = 'internal-error';
+const String invalidCredentialCode = 'invalid-credential';
+const String invalidPasswordCode = 'invalid-password';
+const String userDisabledCode = 'user-disabled';
+const String userNotFoundCode = 'user-not-found';
+const String wrongPasswordCode = 'wrong-password';
+const String userCancelCode = 'user-cancel';
+const String usernameInUseCode = 'username-in-use';
 
 //Dio
 const String connectionTimeoutCode = 'dio-connection-timeout';
@@ -42,6 +43,7 @@ const String invalidPasswordMessage = 'The provided password is invalid.';
 const String userDisabledMessage = 'Your account has been disabled.';
 const String userNotFoundMessage = 'There is no user associated to this email.';
 const String wrongPasswordMessage = 'The provided password is invalid.';
+const String usernameInUseMessage = 'Username is already in use.';
 
 //Dio
 const String connectionTimeoutMessage =

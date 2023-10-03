@@ -40,7 +40,7 @@ class ForecastScrollContainer {
     if (indexChanged) {
       await scrollController.animateTo(
         offset * _currentIndex,
-        duration: const Duration(milliseconds: 250),
+        duration: const Duration(milliseconds: 300),
         curve: Curves.linear,
       );
     }

@@ -34,4 +34,16 @@ class UserRepository {
         .doc(uid)
         .set(entity.toDatabase());
   }
+
+  Future<bool> isUserInDatabase(final String username) async {
+    final userDoc = await _firesotreInstance
+        .collection('/users')
+        .where('username', isEqualTo: username.toLowerCase())
+        .get();
+
+    if (userDoc.docs.isEmpty) {
+      return false;
+    }
+    return true;
+  }
 }

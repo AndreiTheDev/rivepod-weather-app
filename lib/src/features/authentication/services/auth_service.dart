@@ -62,6 +62,15 @@ class AuthService {
     final String username,
   ) async {
     try {
+      final usernameExists = await userRepository.isUserInDatabase(username);
+      if (usernameExists) {
+        return Error(
+          AppException(
+            code: usernameInUseCode,
+            message: usernameInUseMessage,
+          ),
+        );
+      }
       final user = await authRepository.signUpWithEmail(email, password);
       final UserEntity userEntity = UserEntity(
         user: user,

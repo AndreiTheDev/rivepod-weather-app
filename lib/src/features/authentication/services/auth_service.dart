@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:multiple_result/multiple_result.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../core/error_handling/app_exceptions/app_exception.dart';
 import '../../core/error_handling/app_exceptions/error_types.dart';
@@ -10,12 +10,13 @@ import '../data/auth_repository.dart';
 import '../data/entities/user_entity.dart';
 import '../data/user_repository.dart';
 
-final authServiceProvider = Provider<AuthService>(
-  (final ref) => AuthService(
-    authRepository: ref.read(authRepositoryProvider),
-    userRepository: ref.read(userRepositoryProvider),
-  ),
-);
+part 'auth_service.g.dart';
+
+@Riverpod(keepAlive: true)
+AuthService authService(final AuthServiceRef ref) => AuthService(
+      authRepository: ref.read(authRepositoryProvider),
+      userRepository: ref.read(userRepositoryProvider),
+    );
 
 class AuthService {
   AuthService({
@@ -56,6 +57,7 @@ class AuthService {
     }
   }
 
+  //Check if username in database has capital letter affect search for lowercase
   Future<Result<UserEntity, AppException>> signUpUser(
     final String email,
     final String password,

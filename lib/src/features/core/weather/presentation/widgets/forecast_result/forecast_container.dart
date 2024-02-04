@@ -24,6 +24,12 @@ class _ForecastContainerState extends State<ForecastContainer> {
   }
 
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(final BuildContext context) {
     return Consumer(
       builder: (
@@ -32,24 +38,23 @@ class _ForecastContainerState extends State<ForecastContainer> {
         final Widget? child,
       ) {
         final ForecastScrollContainer forecastController = ref.watch(
-          forecastScrollController(
-            <String, dynamic>{
-              'scrollController': controller,
-              'offset': MediaQuery.of(context).size.width - 56.0,
-              'listLength': widget.weatherList.length - 1,
-            },
+          forecastScrollControllerProvider(
+            controller,
+            MediaQuery.of(context).size.width - 56.0,
+            widget.weatherList.length - 1,
           ),
         );
-        return GestureDetector(
-          onHorizontalDragEnd: (final DragEndDetails details) async =>
-              forecastController.onScreenDrag(details),
-          child: SingleChildScrollView(
-            controller: controller,
-            scrollDirection: Axis.horizontal,
-            physics: const NeverScrollableScrollPhysics(),
-            padding: const EdgeInsets.only(left: 28, right: 28),
-            child: Row(
-              children: <ResultContainer>[
+        return Expanded(
+          child: GestureDetector(
+            onHorizontalDragEnd: (final DragEndDetails details) async =>
+                forecastController.onScreenDrag(details),
+            child: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 28),
+              physics: const NeverScrollableScrollPhysics(),
+              controller: controller,
+              itemExtent: MediaQuery.sizeOf(context).width - 56,
+              scrollDirection: Axis.horizontal,
+              children: [
                 for (final WeatherModel weather in widget.weatherList)
                   ResultContainer(weather: weather),
               ],

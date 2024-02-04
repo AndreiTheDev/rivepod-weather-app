@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../../../utils/colors.dart' as colors;
+import '../../../../../../utils/box_decoration.dart';
 import '../../../../utility_providers/weather_icon_provider.dart';
 import '../../../domain/models/weather.dart';
 
@@ -18,22 +19,7 @@ class ResultCard extends StatelessWidget {
       child: Container(
         height: 180,
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
-        decoration: BoxDecoration(
-          color: colors.primaryColor900,
-          borderRadius: BorderRadius.circular(24),
-          boxShadow: const <BoxShadow>[
-            BoxShadow(
-              color: Color(0xFFFFFFFF),
-              blurRadius: 8,
-              offset: Offset(-7, -7),
-            ),
-            BoxShadow(
-              color: Color(0xFFDDDDDD),
-              blurRadius: 13,
-              offset: Offset(7, 7),
-            ),
-          ],
-        ),
+        decoration: boxDecoration,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -49,12 +35,12 @@ class ResultCard extends StatelessWidget {
                     letterSpacing: -2,
                     height: 0,
                     shadows: <Shadow>[
-                      Shadow(color: Color(0xFFD0D0D0), offset: Offset(3, 3))
+                      Shadow(color: Color(0xFFD0D0D0), offset: Offset(3, 3)),
                     ],
                   ),
                 ),
                 Text(
-                  'Real Feel: ${weather.feelsLike}°',
+                  AppLocalizations.of(context)!.realFeel(weather.feelsLike),
                   style: const TextStyle(
                     fontSize: 18,
                   ),
@@ -79,7 +65,7 @@ class ResultCard extends StatelessWidget {
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

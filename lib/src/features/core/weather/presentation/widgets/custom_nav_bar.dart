@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../utils/colors.dart';
@@ -39,7 +40,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
             Expanded(
               child: _NavBarButton(
                 icon: Icons.wb_cloudy_outlined,
-                label: 'Weather',
+                label: AppLocalizations.of(context)!.weather,
                 isActive: widget.currentIndex == 0,
                 onTap: () => _onTap(0),
               ),
@@ -47,7 +48,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
             Expanded(
               child: _NavBarButton(
                 icon: Icons.search,
-                label: 'Search',
+                label: AppLocalizations.of(context)!.searches,
                 isActive: widget.currentIndex == 1,
                 onTap: () => _onTap(1),
               ),
@@ -55,7 +56,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
             Expanded(
               child: _NavBarButton(
                 icon: Icons.person,
-                label: 'Friends',
+                label: AppLocalizations.of(context)!.friends,
                 isActive: widget.currentIndex == 2,
                 onTap: () => _onTap(2),
               ),
@@ -63,7 +64,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
             Expanded(
               child: _NavBarButton(
                 icon: Icons.settings,
-                label: 'Settings',
+                label: AppLocalizations.of(context)!.settings,
                 isActive: widget.currentIndex == 3,
                 onTap: () => _onTap(3),
               ),

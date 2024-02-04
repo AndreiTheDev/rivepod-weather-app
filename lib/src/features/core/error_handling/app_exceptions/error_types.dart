@@ -1,4 +1,4 @@
-//codes
+//-----codes
 
 //App
 const String unknownErrorCode = 'unknown-error';
@@ -26,7 +26,7 @@ const String badResponseCode = 'dio-bad-response';
 const String cancelCode = 'dio-cancel';
 const String connectionErrorCode = 'dio-connection-error';
 
-//messages
+//-----messages
 
 //App
 const String unknownErrorMessage = 'An unknown error occured.';

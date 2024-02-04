@@ -1,8 +1,10 @@
 // ignore_for_file: always_specify_types
 
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../core/error_handling/snackbar_controller.dart';
+
+part 'form_controller.g.dart';
 
 class FieldItemState {
   FieldItemState({this.fieldText, this.errorText});
@@ -18,13 +20,12 @@ class FieldItemState {
   }
 }
 
-final emailControllerProvider =
-    StateNotifierProvider<EmailController, FieldItemState>(
-  (final ref) => EmailController(),
-);
-
-class EmailController extends StateNotifier<FieldItemState> {
-  EmailController() : super(FieldItemState());
+@Riverpod(keepAlive: true)
+class EmailController extends _$EmailController {
+  @override
+  FieldItemState build() {
+    return FieldItemState();
+  }
 
   final RegExp _emailRegex = RegExp(
     r"^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
@@ -41,13 +42,12 @@ class EmailController extends StateNotifier<FieldItemState> {
   }
 }
 
-final passwordControllerProvider =
-    StateNotifierProvider<PasswordController, FieldItemState>(
-  (final ref) => PasswordController(),
-);
-
-class PasswordController extends StateNotifier<FieldItemState> {
-  PasswordController() : super(FieldItemState());
+@Riverpod(keepAlive: true)
+class PasswordController extends _$PasswordController {
+  @override
+  FieldItemState build() {
+    return FieldItemState();
+  }
 
   final RegExp _passwordRegex =
       RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
@@ -61,13 +61,12 @@ class PasswordController extends StateNotifier<FieldItemState> {
   }
 }
 
-final usernameControllerProvider =
-    StateNotifierProvider<UsernameController, FieldItemState>(
-  (final ref) => UsernameController(),
-);
-
-class UsernameController extends StateNotifier<FieldItemState> {
-  UsernameController() : super(FieldItemState());
+@Riverpod(keepAlive: true)
+class UsernameController extends _$UsernameController {
+  @override
+  FieldItemState build() {
+    return FieldItemState();
+  }
 
   void onUsernameChange(final String value) {
     if (value.length > 6) {
@@ -78,18 +77,15 @@ class UsernameController extends StateNotifier<FieldItemState> {
   }
 }
 
-final signInProvider = Provider<SignInProvider>(
-  (final ref) {
-    return SignInProvider(
+@Riverpod(keepAlive: true)
+SignIn signIn(final SignInRef ref) => SignIn(
       emailField: ref.watch(emailControllerProvider),
       passwordField: ref.watch(passwordControllerProvider),
       snackbarController: ref.read(snackbarControllerProvider.notifier),
     );
-  },
-);
 
-class SignInProvider {
-  SignInProvider({
+class SignIn {
+  SignIn({
     required this.emailField,
     required this.passwordField,
     required this.snackbarController,
@@ -114,19 +110,16 @@ class SignInProvider {
   }
 }
 
-final signUpProvider = Provider<SignUpProvider>(
-  (final ref) {
-    return SignUpProvider(
+@Riverpod(keepAlive: true)
+SignUp signUp(final SignUpRef ref) => SignUp(
       usernameField: ref.watch(usernameControllerProvider),
       emailField: ref.watch(emailControllerProvider),
       passwordField: ref.watch(passwordControllerProvider),
       snackbarController: ref.read(snackbarControllerProvider.notifier),
     );
-  },
-);
 
-class SignUpProvider {
-  SignUpProvider({
+class SignUp {
+  SignUp({
     required this.usernameField,
     required this.emailField,
     required this.passwordField,

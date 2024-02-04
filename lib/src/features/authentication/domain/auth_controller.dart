@@ -1,14 +1,18 @@
-// ignore_for_file: always_specify_types
+// ignore: lines_longer_than_80_chars
+// ignore_for_file: always_specify_types, avoid_manual_providers_as_generated_provider_dependency
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../core/error_handling/logger.dart';
 import '../../core/error_handling/snackbar_controller.dart';
 import '../services/auth_service.dart';
 import 'form_controller.dart';
 import 'models/user_model.dart';
+
+part 'auth_controller.g.dart';
 
 enum AuthUserState {
   signedIn,
@@ -41,15 +45,14 @@ class AuthState with ChangeNotifier {
   }
 }
 
-final authControllerProvider = Provider<AuthController>(
-  (final ref) => AuthController(
-    authState: ref.watch(authStateProvider),
-    authService: ref.read(authServiceProvider),
-    signInProvider: ref.watch(signInProvider),
-    signUpProvider: ref.watch(signUpProvider),
-    snackbarController: ref.read(snackbarControllerProvider.notifier),
-  ),
-);
+@Riverpod(keepAlive: true)
+AuthController authController(final AuthControllerRef ref) => AuthController(
+      authState: ref.watch(authStateProvider),
+      authService: ref.read(authServiceProvider),
+      signInProvider: ref.watch(signInProvider),
+      signUpProvider: ref.watch(signUpProvider),
+      snackbarController: ref.read(snackbarControllerProvider.notifier),
+    );
 
 class AuthController {
   AuthController({
@@ -62,8 +65,8 @@ class AuthController {
 
   final AuthState authState;
   final AuthService authService;
-  final SignInProvider signInProvider;
-  final SignUpProvider signUpProvider;
+  final SignIn signInProvider;
+  final SignUp signUpProvider;
   final SnackbarController snackbarController;
   final Logger logger = getLogger(AuthController);
 
@@ -91,7 +94,8 @@ class AuthController {
     if (signUpProvider.validate()) {
       final String email = signUpProvider.emailField.fieldText!;
       final String password = signUpProvider.passwordField.fieldText!;
-      final String username = signUpProvider.usernameField.fieldText!;
+      final String username =
+          signUpProvider.usernameField.fieldText!.toLowerCase();
 
       final response = await authService.signUpUser(email, password, username);
       response.when(

@@ -1,16 +1,19 @@
+// ignore_for_file: avoid_manual_providers_as_generated_provider_dependency
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../authentication/domain/auth_controller.dart';
 import '../../error_handling/app_exceptions/app_exception.dart';
 import '../../error_handling/app_exceptions/error_types.dart';
 import 'entities/weather_entity.dart';
 
-final databaseRepositoryProvider = Provider<DatabaseRepository>(
-  (final ref) => DatabaseRepository(
-    ref.watch(authStateProvider),
-  ),
-);
+part 'database_repository.g.dart';
+
+@Riverpod(keepAlive: true)
+DatabaseRepository databaseRepository(final DatabaseRepositoryRef ref) =>
+    DatabaseRepository(
+      ref.watch(authStateProvider),
+    );
 
 class DatabaseRepository {
   DatabaseRepository(this.authState);

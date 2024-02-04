@@ -1,9 +1,12 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../services/weather_service.dart';
 import 'models/search.dart';
 
-final searchesProvider = StreamProvider((final ref) async* {
+part 'searches_controller.g.dart';
+
+@Riverpod(keepAlive: true)
+Stream<List<SearchModel>> searches(final SearchesRef ref) async* {
   final stream = ref.watch(weatherServiceProvider).getSearchesStream();
 
   var allSearches = const <SearchModel>[];
@@ -13,4 +16,4 @@ final searchesProvider = StreamProvider((final ref) async* {
         .toList();
     yield allSearches;
   }
-});
+}

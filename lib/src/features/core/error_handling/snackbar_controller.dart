@@ -2,8 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../utils/colors.dart' as colors;
+
+part 'snackbar_controller.g.dart';
 
 enum SnackbarType {
   success,
@@ -24,20 +27,15 @@ class SnackbarState {
   }
 }
 
-final StateNotifierProvider<SnackbarController, SnackbarState>
-    snackbarControllerProvider =
-    StateNotifierProvider<SnackbarController, SnackbarState>(
-  (final ref) => SnackbarController(),
-);
-
-class SnackbarController extends StateNotifier<SnackbarState> {
-  SnackbarController()
-      : super(
-          SnackbarState(
-            message: '',
-            type: SnackbarType.error,
-          ),
-        );
+@Riverpod(keepAlive: true)
+class SnackbarController extends _$SnackbarController {
+  @override
+  SnackbarState build() {
+    return SnackbarState(
+      message: '',
+      type: SnackbarType.error,
+    );
+  }
 
   void setMessage(final String message, final SnackbarType type) {
     state = state.copyWith(message: message, type: type);

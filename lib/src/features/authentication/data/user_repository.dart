@@ -1,13 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../core/error_handling/app_exceptions/app_exception.dart';
 import '../../core/error_handling/app_exceptions/error_types.dart';
 import 'entities/user_entity.dart';
 
-final userRepositoryProvider =
-    Provider<UserRepository>((final ref) => UserRepository());
+part 'user_repository.g.dart';
+
+@Riverpod(keepAlive: true)
+UserRepository userRepository(final UserRepositoryRef ref) => UserRepository();
 
 class UserRepository {
   final _firesotreInstance = FirebaseFirestore.instance;

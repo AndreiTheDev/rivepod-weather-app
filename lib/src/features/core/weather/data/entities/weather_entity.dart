@@ -1,28 +1,30 @@
-// ignore_for_file: avoid_dynamic_calls
-class WeatherEntity {
-  WeatherEntity({
-    required this.city,
-    required this.temp,
-    required this.feelsLike,
-    required this.pressure,
-    required this.humidity,
-    required this.windSpeed,
-    required this.dateTime,
-    required this.description,
-    required this.iconId,
-  });
+// ignore_for_file: avoid_dynamic_calls, avoid_positional_boolean_parameters
 
-  final String city;
-  final String temp;
-  final String feelsLike;
-  final String pressure;
-  final String humidity;
-  final String windSpeed;
-  final DateTime dateTime;
-  final String description;
-  final int iconId;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  factory WeatherEntity.fromData(final Map<String, dynamic> data) {
+part 'weather_entity.freezed.dart';
+
+@freezed
+class WeatherEntity with _$WeatherEntity {
+  factory WeatherEntity({
+    required final String city,
+    required final String temp,
+    required final String feelsLike,
+    required final String pressure,
+    required final String humidity,
+    required final String windSpeed,
+    required final DateTime dateTime,
+    required final String description,
+    required final int iconId,
+    required final bool isMetricUnits,
+  }) = _WeatherEntity;
+
+  WeatherEntity._();
+
+  factory WeatherEntity.fromData(
+    final Map<String, dynamic> data,
+    final bool units,
+  ) {
     final num temp = data['main']['temp'];
     final num feelsLike = data['main']['feels_like'];
     final num pressure = data['main']['pressure'];
@@ -41,6 +43,7 @@ class WeatherEntity {
       dateTime: dateTime,
       description: data['weather'][0]['description'],
       iconId: data['weather'][0]['id'] as int,
+      isMetricUnits: units,
     );
   }
 
@@ -54,6 +57,7 @@ class WeatherEntity {
       'windSpeed': windSpeed,
       'description': description,
       'iconId': iconId,
+      'isMetricUnits': isMetricUnits,
     };
   }
 }

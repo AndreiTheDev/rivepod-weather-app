@@ -15,7 +15,7 @@ class MyPrinter extends LogPrinter {
     final AnsiColor color = PrettyPrinter.defaultLevelColors[event.level]!;
     final String? emoji = PrettyPrinter.defaultLevelEmojis[event.level];
     return <String>[
-      color('${event.level}  $emoji $className - ${event.message}')
+      color('${event.level}  $emoji $className - ${event.message}'),
     ];
   }
 }

@@ -47,3 +47,4 @@ app.*.map.json
 lib/src/utils/api_keys.dart
 assets/designs
 firebase_emulator_data
+.vscode

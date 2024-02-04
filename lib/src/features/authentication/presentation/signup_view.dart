@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
@@ -56,9 +57,9 @@ class SignUpViewState extends ConsumerState<SignUpView> {
             SizedBox(
               height: MediaQuery.of(context).size.height / 6,
             ),
-            const Text(
-              'Sign Up',
-              style: TextStyle(fontSize: 46),
+            Text(
+              AppLocalizations.of(context)!.signUp,
+              style: const TextStyle(fontSize: 46),
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height / 11,
@@ -72,7 +73,7 @@ class SignUpViewState extends ConsumerState<SignUpView> {
                 return TextField(
                   controller: _usernameController,
                   decoration: InputDecoration(
-                    hintText: 'Enter your username...',
+                    hintText: AppLocalizations.of(context)!.enterUsername,
                     errorText: ref.watch(
                       usernameControllerProvider.select(
                         (final FieldItemState value) => value.errorText,
@@ -99,7 +100,7 @@ class SignUpViewState extends ConsumerState<SignUpView> {
                 return TextField(
                   controller: _emailController,
                   decoration: InputDecoration(
-                    hintText: 'Enter your email...',
+                    hintText: AppLocalizations.of(context)!.enterEmail,
                     errorText: ref.watch(
                       emailControllerProvider.select(
                         (final FieldItemState value) => value.errorText,
@@ -127,7 +128,7 @@ class SignUpViewState extends ConsumerState<SignUpView> {
                   controller: _passwordController,
                   obscureText: isNotVisible,
                   decoration: InputDecoration(
-                    hintText: 'Enter your password...',
+                    hintText: AppLocalizations.of(context)!.enterPassword,
                     errorText: ref.watch(
                       passwordControllerProvider.select(
                         (final FieldItemState value) => value.errorText,
@@ -173,10 +174,11 @@ class SignUpViewState extends ConsumerState<SignUpView> {
                   setState(() {
                     isFieldsEnabled = true;
                   });
+                  FocusManager.instance.primaryFocus?.unfocus();
                 },
                 child: child,
               ),
-              child: const Text('Sign Up'),
+              child: Text(AppLocalizations.of(context)!.signUp),
             ),
             const SizedBox(
               height: 16,
@@ -184,9 +186,9 @@ class SignUpViewState extends ConsumerState<SignUpView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const Text(
-                  'Already have an account?',
-                  style: TextStyle(fontSize: 16),
+                Text(
+                  AppLocalizations.of(context)!.alreadyAccount,
+                  style: const TextStyle(fontSize: 16),
                 ),
                 Consumer(
                   builder: (
@@ -204,9 +206,9 @@ class SignUpViewState extends ConsumerState<SignUpView> {
                     },
                     child: child!,
                   ),
-                  child: const Text(
-                    'Sign In',
-                    style: TextStyle(fontSize: 16),
+                  child: Text(
+                    AppLocalizations.of(context)!.signIn,
+                    style: const TextStyle(fontSize: 16),
                   ),
                 ),
               ],

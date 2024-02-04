@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
@@ -53,9 +54,9 @@ class SignInViewState extends ConsumerState<SignInView> {
             SizedBox(
               height: MediaQuery.of(context).size.height / 6,
             ),
-            const Text(
-              'Sign In',
-              style: TextStyle(fontSize: 46),
+            Text(
+              AppLocalizations.of(context)!.signIn,
+              style: const TextStyle(fontSize: 46),
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height / 11,
@@ -70,7 +71,7 @@ class SignInViewState extends ConsumerState<SignInView> {
                   controller: _emailController,
                   enabled: isFieldsEnabled,
                   decoration: InputDecoration(
-                    hintText: 'Enter your email...',
+                    hintText: AppLocalizations.of(context)!.enterEmail,
                     errorText: ref.watch(
                       emailControllerProvider.select(
                         (final FieldItemState value) => value.errorText,
@@ -99,7 +100,7 @@ class SignInViewState extends ConsumerState<SignInView> {
                   obscureText: isNotVisible,
                   enabled: isFieldsEnabled,
                   decoration: InputDecoration(
-                    hintText: 'Enter your password...',
+                    hintText: AppLocalizations.of(context)!.enterPassword,
                     errorText: ref.watch(
                       passwordControllerProvider.select(
                         (final FieldItemState value) => value.errorText,
@@ -145,19 +146,20 @@ class SignInViewState extends ConsumerState<SignInView> {
                   setState(() {
                     isFieldsEnabled = true;
                   });
+                  FocusManager.instance.primaryFocus?.unfocus();
                 },
                 child: child,
               ),
-              child: const Text('Sign In'),
+              child: Text(AppLocalizations.of(context)!.signIn),
             ),
             const SizedBox(
               height: 16,
             ),
             TextButton(
               onPressed: () {},
-              child: const Text(
-                'Recover your password.',
-                style: TextStyle(fontSize: 16),
+              child: Text(
+                AppLocalizations.of(context)!.recoverPassword,
+                style: const TextStyle(fontSize: 16),
               ),
             ),
             const SizedBox(
@@ -166,9 +168,9 @@ class SignInViewState extends ConsumerState<SignInView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const Text(
-                  "Don't have an account?",
-                  style: TextStyle(fontSize: 16),
+                Text(
+                  AppLocalizations.of(context)!.noAccount,
+                  style: const TextStyle(fontSize: 16),
                 ),
                 Consumer(
                   builder: (
@@ -187,9 +189,9 @@ class SignInViewState extends ConsumerState<SignInView> {
                     },
                     child: child!,
                   ),
-                  child: const Text(
-                    'Create one',
-                    style: TextStyle(fontSize: 16),
+                  child: Text(
+                    AppLocalizations.of(context)!.signUp,
+                    style: const TextStyle(fontSize: 16),
                   ),
                 ),
               ],

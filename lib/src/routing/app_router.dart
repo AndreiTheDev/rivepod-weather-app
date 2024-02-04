@@ -5,17 +5,19 @@ import 'package:go_router/go_router.dart';
 import '../features/authentication/domain/auth_controller.dart';
 import '../features/authentication/presentation/signin_view.dart';
 import '../features/authentication/presentation/signup_view.dart';
+import '../features/core/friends/presentation/friend_requests_view.dart';
+import '../features/core/friends/presentation/friends_view.dart';
+import '../features/core/settings/presentation/settings_view.dart';
 import '../features/core/weather/presentation/forecast_view.dart';
-import '../features/core/weather/presentation/friends_view.dart';
 import '../features/core/weather/presentation/home_view.dart';
 import '../features/core/weather/presentation/searches_view.dart';
-import '../features/core/weather/presentation/settings_view.dart';
 import '../features/core/weather/presentation/weather_view.dart';
 import '../features/core/weather/presentation/widgets/app_scaffold.dart';
 
 final routerProvider = Provider<GoRouter>((final ref) {
   final AuthState authState = ref.watch(
-    authControllerProvider.select((final value) => value.authState),
+    authControllerProvider
+        .select((final authController) => authController.authState),
   );
   final GlobalKey<NavigatorState> rootNavigatorKey =
       GlobalKey<NavigatorState>();
@@ -87,6 +89,14 @@ final routerProvider = Provider<GoRouter>((final ref) {
                 (final BuildContext context, final GoRouterState state) =>
                     const NoTransitionPage<SettingsView>(
               child: SettingsView(),
+            ),
+          ),
+          GoRoute(
+            path: '/friend-requests',
+            pageBuilder:
+                (final BuildContext context, final GoRouterState state) =>
+                    const NoTransitionPage<FriendRequestsView>(
+              child: FriendRequestsView(),
             ),
           ),
         ],

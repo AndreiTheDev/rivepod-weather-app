@@ -1,37 +1,51 @@
+// ignore_for_file: avoid_positional_boolean_parameters
+
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:multiple_result/multiple_result.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../error_handling/app_exceptions/app_exception.dart';
 import '../../error_handling/app_exceptions/error_types.dart';
 import '../../error_handling/logger.dart';
+import '../../settings/domain/user_prefs_controller.dart';
 import '../data/database_repository.dart';
 import '../data/entities/weather_entity.dart';
 import '../data/weather_repository.dart';
 
-final weatherServiceProvider = Provider(
-  (final ref) => WeatherService(
-    ref.watch(weatherRepositoryProvider),
-    ref.watch(databaseRepositoryProvider),
-  ),
-);
+part 'weather_service.g.dart';
+
+@Riverpod(keepAlive: true)
+WeatherService weatherService(final WeatherServiceRef ref) => WeatherService(
+      ref.watch(weatherRepositoryProvider),
+      ref.watch(databaseRepositoryProvider),
+      ref.watch(
+        userPrefsControllerProvider.select((final state) => state.metricUnits),
+      ),
+    );
 
 class WeatherService {
-  WeatherService(this._weatherRepository, this._databaseRepository);
+  WeatherService(
+    this._weatherRepository,
+    this._databaseRepository,
+    this.userPrefUnits,
+  );
 
   final WeatherRepository _weatherRepository;
   final DatabaseRepository _databaseRepository;
+  final bool userPrefUnits;
   final Logger _logger = getLogger(WeatherService);
 
   Future<Result<WeatherEntity, AppException>> fetchCurrentWeather(
     final String city,
   ) async {
     try {
-      final responseEntity = await _weatherRepository.fetchCurrentWeather(city);
+      final String units = userPrefUnits ? 'metric' : 'imperial';
+      final responseEntity =
+          await _weatherRepository.fetchCurrentWeather(city, units);
       await _databaseRepository.postWeatherSearch(responseEntity);
 
       return Success(responseEntity);
@@ -53,8 +67,9 @@ class WeatherService {
     final String city,
   ) async {
     try {
+      final String units = userPrefUnits ? 'metric' : 'imperial';
       final responseEntities =
-          await _weatherRepository.fetch5DaysForecast(city);
+          await _weatherRepository.fetch5DaysForecast(city, units);
 
       return Success(responseEntities);
     } on SocketException {

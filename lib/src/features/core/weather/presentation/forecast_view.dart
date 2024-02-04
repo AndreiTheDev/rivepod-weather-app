@@ -18,7 +18,7 @@ class ForecastView extends StatelessWidget {
     return Column(
       children: <Widget>[
         const Padding(
-          padding: EdgeInsets.only(top: 16, left: 16, right: 16),
+          padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
           child: CustomAppBar(
             hasBackButton: true,
             hasNotificationButton: true,

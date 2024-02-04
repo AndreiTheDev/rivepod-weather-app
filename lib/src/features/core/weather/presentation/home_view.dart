@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
@@ -39,7 +40,6 @@ class _HomeViewState extends ConsumerState<HomeView> {
   Widget build(final BuildContext context) {
     _logger.d('build');
     snackbarDisplayer(context, ref);
-
     ref
       ..listen(
           weatherControllerProvider
@@ -69,7 +69,9 @@ class _HomeViewState extends ConsumerState<HomeView> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              isForecast ? 'Forecast Weather' : 'Current Weather',
+              isForecast
+                  ? AppLocalizations.of(context)!.forecastWeather
+                  : AppLocalizations.of(context)!.currentWeather,
               style: const TextStyle(fontSize: 40),
             ),
             const SizedBox(
@@ -78,7 +80,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
             TextField(
               controller: controller,
               decoration: InputDecoration(
-                hintText: 'Enter city...',
+                hintText: AppLocalizations.of(context)!.enterCity,
                 suffixIcon: SuffixIcon(
                   isActive: isForecast,
                   onTap: () {
@@ -108,7 +110,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
                   controller.clear();
                 }
               },
-              child: const Text('Get Weather'),
+              child: Text(AppLocalizations.of(context)!.getWeather),
             ),
           ],
         ),

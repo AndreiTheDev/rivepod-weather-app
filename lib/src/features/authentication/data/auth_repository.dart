@@ -1,15 +1,15 @@
 // ignore_for_file: always_specify_types
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../core/error_handling/app_exceptions/app_exception.dart';
 import '../../core/error_handling/app_exceptions/error_types.dart';
 
-// import '../../core/error_handling/snackbar_controller.dart';
+part 'auth_repository.g.dart';
 
-final authRepositoryProvider =
-    Provider<AuthRepository>((final ref) => AuthRepository());
+@Riverpod(keepAlive: true)
+AuthRepository authRepository(final AuthRepositoryRef ref) => AuthRepository();
 
 class AuthRepository {
   AuthRepository();

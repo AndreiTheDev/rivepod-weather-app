@@ -1,17 +1,25 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
 import '../../data/entities/weather_entity.dart';
 
-class WeatherModel {
-  WeatherModel({
-    required this.city,
-    required this.temp,
-    required this.feelsLike,
-    required this.pressure,
-    required this.humidity,
-    required this.windSpeed,
-    required this.dateTime,
-    required this.description,
-    required this.iconId,
-  });
+part 'weather.freezed.dart';
+
+@freezed
+class WeatherModel with _$WeatherModel {
+  factory WeatherModel({
+    required final String city,
+    required final String temp,
+    required final String feelsLike,
+    required final String pressure,
+    required final String humidity,
+    required final String windSpeed,
+    required final DateTime dateTime,
+    required final String description,
+    required final int iconId,
+    required final bool isMetricUnits,
+  }) = _WeatherModel;
+
+  WeatherModel._();
 
   factory WeatherModel.fromEntity(final WeatherEntity entity) {
     return WeatherModel(
@@ -24,18 +32,9 @@ class WeatherModel {
       dateTime: entity.dateTime,
       description: entity.description,
       iconId: entity.iconId,
+      isMetricUnits: entity.isMetricUnits,
     );
   }
-
-  final String city;
-  final String temp;
-  final String feelsLike;
-  final String pressure;
-  final String humidity;
-  final String windSpeed;
-  final DateTime dateTime;
-  final String description;
-  final int iconId;
 
   WeatherEntity toEntity() {
     return WeatherEntity(
@@ -48,6 +47,7 @@ class WeatherModel {
       dateTime: dateTime,
       description: description,
       iconId: iconId,
+      isMetricUnits: isMetricUnits,
     );
   }
 }

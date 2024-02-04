@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+// import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../error_handling/logger.dart';
 
-final AutoDisposeProviderFamily<ForecastScrollContainer, Map<String, dynamic>>
-    forecastScrollController = Provider.autoDispose.family(
-  (
-    final AutoDisposeProviderRef<Object?> ref,
-    final Map<String, dynamic> family,
-  ) =>
-      ForecastScrollContainer(
-    family['scrollController'],
-    family['offset'],
-    family['listLength'],
-  ),
-);
+part 'forecast_scroll_controller.g.dart';
+
+@riverpod
+ForecastScrollContainer forecastScrollController(
+  final ForecastScrollControllerRef ref,
+  final ScrollController controller,
+  final double offset,
+  final int listLength,
+) {
+  return ForecastScrollContainer(
+    controller,
+    offset,
+    listLength,
+  );
+}
 
 class ForecastScrollContainer {
   ForecastScrollContainer(this.scrollController, this.offset, this.listLenght);
@@ -40,8 +44,8 @@ class ForecastScrollContainer {
     if (indexChanged) {
       await scrollController.animateTo(
         offset * _currentIndex,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.linear,
+        duration: const Duration(milliseconds: 250),
+        curve: Curves.easeInOut,
       );
     }
   }

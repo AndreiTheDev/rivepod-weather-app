@@ -156,7 +156,12 @@ class SignInViewState extends ConsumerState<SignInView> {
               height: 16,
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                context.go('/recover-password');
+                ref
+                  ..invalidate(emailControllerProvider)
+                  ..invalidate(passwordControllerProvider);
+              },
               child: Text(
                 AppLocalizations.of(context)!.recoverPassword,
                 style: const TextStyle(fontSize: 16),

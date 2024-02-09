@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../features/authentication/domain/auth_controller.dart';
+import '../features/authentication/presentation/recover_password_view.dart';
 import '../features/authentication/presentation/signin_view.dart';
 import '../features/authentication/presentation/signup_view.dart';
 import '../features/core/friends/presentation/friend_requests_view.dart';
@@ -115,17 +116,29 @@ final routerProvider = Provider<GoRouter>((final ref) {
           child: SignUpView(),
         ),
       ),
+      GoRoute(
+        path: '/recover-password',
+        pageBuilder: (final BuildContext context, final GoRouterState state) =>
+            const NoTransitionPage<RecoverPasswordView>(
+          child: RecoverPasswordView(),
+        ),
+      ),
     ],
     refreshListenable: authState,
     redirect: (final BuildContext context, final GoRouterState state) {
       final bool isSignedIn = authState.authUserState == AuthUserState.signedIn;
       final bool isSigningIn = state.matchedLocation == '/signin';
       final bool isSigningUp = state.matchedLocation == '/signup';
-      if (!isSignedIn && !isSigningUp) {
+      final bool isRecoverPassword =
+          state.matchedLocation == '/recover-password';
+      if (!isSignedIn && !isSigningUp && !isRecoverPassword) {
         return isSigningIn ? null : '/signin';
       }
-      if (!isSignedIn && !isSigningIn) {
+      if (!isSignedIn && !isSigningIn && !isRecoverPassword) {
         return isSigningUp ? null : '/signup';
+      }
+      if (!isSignedIn && !isSigningIn && !isSigningUp) {
+        return isSigningUp ? null : '/recover-password';
       }
       if (isSigningIn || isSigningUp) {
         return '/';

@@ -58,6 +58,10 @@ class AuthRepository {
     }
   }
 
+  Future<void> recoverPassword(final String email) async {
+    await _instance.sendPasswordResetEmail(email: email);
+  }
+
   User? isLoggedIn() {
     return _instance.currentUser;
   }

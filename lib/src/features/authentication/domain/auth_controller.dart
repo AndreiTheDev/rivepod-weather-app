@@ -123,6 +123,16 @@ class AuthController {
     );
   }
 
+  Future<bool> recoverPassword(final String email) async {
+    final response = await authService.recoverPassword(email);
+    final bool isSuccess =
+        response.when((final success) => true, (final error) {
+      snackbarController.setMessage(error.message, SnackbarType.error);
+      return false;
+    });
+    return isSuccess;
+  }
+
   Future<void> initState() async {
     logger.d('initState - call');
     final response = await authService.checkUserLoggedIn();

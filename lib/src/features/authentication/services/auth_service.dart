@@ -147,4 +147,20 @@ class AuthService {
       );
     }
   }
+
+  Future<Result<void, AppException>> recoverPassword(final String email) async {
+    try {
+      await authRepository.recoverPassword(email);
+      return const Success(null);
+    } on FirebaseException catch (e) {
+      return Error(AppException.getFirebaseException(e.code));
+    } on Exception {
+      return Error(
+        AppException(
+          code: 'recover-password-fail',
+          message: 'Unable to send recovery email',
+        ),
+      );
+    }
+  }
 }

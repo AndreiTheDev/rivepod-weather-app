@@ -34,7 +34,6 @@ class NotificationsController {
       await _messagingInstance.requestPermission();
 
       final fcmToken = await _messagingInstance.getToken();
-      print(fcmToken);
 
       if (auth.authUserState == AuthUserState.signedIn && auth.user != null) {
         await _firestoreInstance

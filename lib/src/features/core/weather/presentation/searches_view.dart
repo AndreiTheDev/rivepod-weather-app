@@ -119,19 +119,23 @@ class ListItem extends StatelessWidget {
                     builder: (final context, final ref, final child) =>
                         GestureDetector(
                       onTap: () async {
-                        final bool isFriend = await ref
-                            .read(friendsControllerProvider)
-                            .checkIsFriendOrHasRequest(searchModel.uid);
-                        if (context.mounted) {
-                          await showFriendDialog(
-                            context,
-                            searchModel,
-                            isFriend: isFriend,
-                          );
+                        if (!searchModel.isIncognito) {
+                          final bool isFriend = await ref
+                              .read(friendsControllerProvider)
+                              .checkIsFriendOrHasRequest(searchModel.uid);
+                          if (context.mounted) {
+                            await showFriendDialog(
+                              context,
+                              searchModel,
+                              isFriend: isFriend,
+                            );
+                          }
                         }
                       },
                       child: Text(
-                        searchModel.username,
+                        !searchModel.isIncognito
+                            ? searchModel.username
+                            : 'Anonymous',
                         style: const TextStyle(
                           fontSize: 20,
                           color: colors.detailColor,

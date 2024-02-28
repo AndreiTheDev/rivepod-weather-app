@@ -14,6 +14,7 @@ class SearchModel with _$SearchModel {
     required final String uid,
     required final String email,
     required final bool isMetricUnits,
+    @Default(false) final bool isIncognito,
   }) = _SearchModel;
 
   SearchModel._();
@@ -27,6 +28,7 @@ class SearchModel with _$SearchModel {
       username: data['user']['username'],
       email: data['user']['email'],
       uid: data['user']['uid'],
+      isIncognito: data['isIncognito'] ?? false,
     );
   }
 }

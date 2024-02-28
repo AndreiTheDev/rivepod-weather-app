@@ -5,6 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../authentication/domain/auth_controller.dart';
 import '../../error_handling/app_exceptions/app_exception.dart';
 import '../../error_handling/app_exceptions/error_types.dart';
+import '../../settings/domain/user_prefs_controller.dart';
 import 'entities/weather_entity.dart';
 
 part 'database_repository.g.dart';
@@ -13,13 +14,18 @@ part 'database_repository.g.dart';
 DatabaseRepository databaseRepository(final DatabaseRepositoryRef ref) =>
     DatabaseRepository(
       ref.watch(authStateProvider),
+      isIncognito: ref.watch(
+        userPrefsControllerProvider
+            .select((final prefsState) => prefsState.incognitoMode),
+      ),
     );
 
 class DatabaseRepository {
-  DatabaseRepository(this.authState);
+  DatabaseRepository(this.authState, {required this.isIncognito});
 
   final FirebaseFirestore _instance = FirebaseFirestore.instance;
   final AuthState authState;
+  final bool isIncognito;
 
   Future<void> postWeatherSearch(final WeatherEntity entity) async {
     final user = authState.user;
@@ -33,6 +39,7 @@ class DatabaseRepository {
         'weather': entity.toDatabase(),
         'user': user.toDatabase(),
         'timestamp': Timestamp.now(),
+        'isIncognito': isIncognito,
       })
       ..set(
         _instance

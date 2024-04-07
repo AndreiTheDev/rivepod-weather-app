@@ -10,6 +10,6 @@
 
 - In the feature chat option with your friends.
 
-##Everything done with a cool design
+## Everything done with a cool design
 
 ![App design](https://github.com/AndreiTheDev/rivepod-weather-app/blob/main/assets/designs/be40dff2-b202-4cb7-86bc-12c3ad53642d.jpg)

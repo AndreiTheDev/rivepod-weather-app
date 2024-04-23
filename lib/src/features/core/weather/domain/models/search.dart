@@ -14,6 +14,7 @@ class SearchModel with _$SearchModel {
     required final String uid,
     required final String email,
     required final bool isMetricUnits,
+    required final String docId,
     @Default(false) final bool isIncognito,
   }) = _SearchModel;
 
@@ -29,6 +30,7 @@ class SearchModel with _$SearchModel {
       email: data['user']['email'],
       uid: data['user']['uid'],
       isIncognito: data['isIncognito'] ?? false,
+      docId: data['docId'],
     );
   }
 }

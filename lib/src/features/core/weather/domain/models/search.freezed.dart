@@ -23,6 +23,7 @@ mixin _$SearchModel {
   String get uid => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   bool get isMetricUnits => throw _privateConstructorUsedError;
+  String get docId => throw _privateConstructorUsedError;
   bool get isIncognito => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -44,6 +45,7 @@ abstract class $SearchModelCopyWith<$Res> {
       String uid,
       String email,
       bool isMetricUnits,
+      String docId,
       bool isIncognito});
 }
 
@@ -67,6 +69,7 @@ class _$SearchModelCopyWithImpl<$Res, $Val extends SearchModel>
     Object? uid = null,
     Object? email = null,
     Object? isMetricUnits = null,
+    Object? docId = null,
     Object? isIncognito = null,
   }) {
     return _then(_value.copyWith(
@@ -98,6 +101,10 @@ class _$SearchModelCopyWithImpl<$Res, $Val extends SearchModel>
           ? _value.isMetricUnits
           : isMetricUnits // ignore: cast_nullable_to_non_nullable
               as bool,
+      docId: null == docId
+          ? _value.docId
+          : docId // ignore: cast_nullable_to_non_nullable
+              as String,
       isIncognito: null == isIncognito
           ? _value.isIncognito
           : isIncognito // ignore: cast_nullable_to_non_nullable
@@ -122,6 +129,7 @@ abstract class _$$SearchModelImplCopyWith<$Res>
       String uid,
       String email,
       bool isMetricUnits,
+      String docId,
       bool isIncognito});
 }
 
@@ -143,6 +151,7 @@ class __$$SearchModelImplCopyWithImpl<$Res>
     Object? uid = null,
     Object? email = null,
     Object? isMetricUnits = null,
+    Object? docId = null,
     Object? isIncognito = null,
   }) {
     return _then(_$SearchModelImpl(
@@ -174,6 +183,10 @@ class __$$SearchModelImplCopyWithImpl<$Res>
           ? _value.isMetricUnits
           : isMetricUnits // ignore: cast_nullable_to_non_nullable
               as bool,
+      docId: null == docId
+          ? _value.docId
+          : docId // ignore: cast_nullable_to_non_nullable
+              as String,
       isIncognito: null == isIncognito
           ? _value.isIncognito
           : isIncognito // ignore: cast_nullable_to_non_nullable
@@ -193,6 +206,7 @@ class _$SearchModelImpl extends _SearchModel {
       required this.uid,
       required this.email,
       required this.isMetricUnits,
+      required this.docId,
       this.isIncognito = false})
       : super._();
 
@@ -211,12 +225,14 @@ class _$SearchModelImpl extends _SearchModel {
   @override
   final bool isMetricUnits;
   @override
+  final String docId;
+  @override
   @JsonKey()
   final bool isIncognito;
 
   @override
   String toString() {
-    return 'SearchModel(city: $city, temp: $temp, iconId: $iconId, username: $username, uid: $uid, email: $email, isMetricUnits: $isMetricUnits, isIncognito: $isIncognito)';
+    return 'SearchModel(city: $city, temp: $temp, iconId: $iconId, username: $username, uid: $uid, email: $email, isMetricUnits: $isMetricUnits, docId: $docId, isIncognito: $isIncognito)';
   }
 
   @override
@@ -233,13 +249,14 @@ class _$SearchModelImpl extends _SearchModel {
             (identical(other.email, email) || other.email == email) &&
             (identical(other.isMetricUnits, isMetricUnits) ||
                 other.isMetricUnits == isMetricUnits) &&
+            (identical(other.docId, docId) || other.docId == docId) &&
             (identical(other.isIncognito, isIncognito) ||
                 other.isIncognito == isIncognito));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, city, temp, iconId, username,
-      uid, email, isMetricUnits, isIncognito);
+      uid, email, isMetricUnits, docId, isIncognito);
 
   @JsonKey(ignore: true)
   @override
@@ -257,6 +274,7 @@ abstract class _SearchModel extends SearchModel {
       required final String uid,
       required final String email,
       required final bool isMetricUnits,
+      required final String docId,
       final bool isIncognito}) = _$SearchModelImpl;
   _SearchModel._() : super._();
 
@@ -274,6 +292,8 @@ abstract class _SearchModel extends SearchModel {
   String get email;
   @override
   bool get isMetricUnits;
+  @override
+  String get docId;
   @override
   bool get isIncognito;
   @override

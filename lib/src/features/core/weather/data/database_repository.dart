@@ -57,6 +57,17 @@ class DatabaseRepository {
     await batch.commit();
   }
 
+  Future<QuerySnapshot<Map<String, dynamic>>> fetchNextSearches(
+    final DocumentSnapshot lastDoc,
+  ) {
+    return _instance
+        .collection('searches')
+        .orderBy('timestamp', descending: true)
+        .limit(10)
+        .startAfterDocument(lastDoc)
+        .get();
+  }
+
   Stream<QuerySnapshot<Map<String, dynamic>>> getWeatherSearches() {
     return _instance
         .collection('searches')

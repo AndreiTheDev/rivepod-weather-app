@@ -90,6 +90,25 @@ class WeatherService {
     }
   }
 
+  Future<
+      Result<List<QueryDocumentSnapshot<Map<String, dynamic>>>,
+          AppException>> fetchNextSearches(
+    final DocumentSnapshot lastDoc,
+  ) async {
+    try {
+      final response = await _databaseRepository.fetchNextSearches(lastDoc);
+      return Success(response.docs);
+    } on FirebaseException catch (e) {
+      _logger.e('fetchNextSearches - Firebase Exception - ${e.code}');
+      return Error(AppException.getFirebaseException(e.code));
+    } on Exception {
+      _logger.e('fetchNextSearches - Unknown Exception');
+      return Error(
+        AppException(code: unknownErrorCode, message: unknownErrorMessage),
+      );
+    }
+  }
+
   Stream<QuerySnapshot<Map<String, dynamic>>> getSearchesStream() {
     return _databaseRepository.getWeatherSearches();
   }

@@ -6,7 +6,7 @@ part of 'searches_converter.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$convertedSearchesHash() => r'a1b403a5fef07bb9224c59590f985b090a9959c5';
+String _$convertedSearchesHash() => r'78dce40dc5591e5c2be0c36e660647b037353e06';
 
 /// See also [convertedSearches].
 @ProviderFor(convertedSearches)

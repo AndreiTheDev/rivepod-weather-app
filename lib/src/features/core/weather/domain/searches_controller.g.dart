@@ -6,11 +6,12 @@ part of 'searches_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$searchesHash() => r'f7f114aa30826bc802ecb69b99822b2ee5e46f96';
+String _$searchesHash() => r'65638b6345b79aa14cfc1033a9151feded09338e';
 
 /// See also [searches].
 @ProviderFor(searches)
-final searchesProvider = StreamProvider<List<SearchModel>>.internal(
+final searchesProvider =
+    StreamProvider<(List<SearchModel>, DocumentSnapshot)>.internal(
   searches,
   name: r'searchesProvider',
   debugGetCreateSourceHash:
@@ -19,9 +20,9 @@ final searchesProvider = StreamProvider<List<SearchModel>>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef SearchesRef = StreamProviderRef<List<SearchModel>>;
+typedef SearchesRef = StreamProviderRef<(List<SearchModel>, DocumentSnapshot)>;
 String _$searchesControllerHash() =>
-    r'18ed5eca276a59e5a4f0cbfbebc7ef185492ff49';
+    r'58f3eada1430a309c1b2076e0db8116e0b3f1544';
 
 /// See also [SearchesController].
 @ProviderFor(SearchesController)

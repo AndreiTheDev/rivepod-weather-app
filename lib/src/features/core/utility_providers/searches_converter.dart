@@ -10,14 +10,15 @@ part 'searches_converter.g.dart';
 AsyncValue<List<SearchModel>> convertedSearches(
   final ConvertedSearchesRef ref,
 ) {
-  final liveSearches = ref.watch(searchesProvider);
+  final searchesController = ref.watch(searchesControllerProvider);
   final userUnitsPrefs = ref.watch(
     userPrefsControllerProvider.select((final state) => state.metricUnits),
   );
 
-  final AsyncValue<List<SearchModel>> convertedSearches = liveSearches.when(
-    data: (final searchList) {
-      final searchesModels = searchList.map((final search) {
+  final AsyncValue<List<SearchModel>> convertedSearches =
+      searchesController.when(
+    data: (final searchesState) {
+      final searchesModels = searchesState.searchesList.map((final search) {
         if (userUnitsPrefs == search.isMetricUnits) {
           return search;
         }

@@ -13,12 +13,43 @@ import '../../friends/domain/friends_controller.dart';
 import '../../utility_providers/searches_converter.dart';
 import '../../utility_providers/weather_icon_provider.dart';
 import '../domain/models/search.dart';
+import '../domain/searches_controller.dart';
 
-class SearchesView extends ConsumerWidget {
+class SearchesView extends ConsumerStatefulWidget {
   const SearchesView({super.key});
 
   @override
-  Widget build(final BuildContext context, final WidgetRef ref) {
+  ConsumerState<SearchesView> createState() => _SearchesViewState();
+}
+
+class _SearchesViewState extends ConsumerState<SearchesView> {
+  late final ScrollController _scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+
+    _scrollController.addListener(
+      () async {
+        if (_scrollController.position.maxScrollExtent ==
+            _scrollController.offset) {
+          await ref
+              .read(searchesControllerProvider.notifier)
+              .fetchNextSearches();
+        }
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(final BuildContext context) {
     snackbarDisplayer(context, ref);
     getLogger(SearchesView).d('build');
 
@@ -35,6 +66,7 @@ class SearchesView extends ConsumerWidget {
           data: (final searches) {
             return Expanded(
               child: ListView.separated(
+                controller: _scrollController,
                 padding: const EdgeInsets.all(16),
                 itemBuilder: (final context, final index) {
                   return ListItem(

@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_manual_providers_as_generated_provider_dependency
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../authentication/domain/auth_controller.dart';
 import '../../error_handling/app_exceptions/app_exception.dart';
@@ -39,6 +40,7 @@ class DatabaseRepository {
         'weather': entity.toDatabase(),
         'user': user.toDatabase(),
         'timestamp': Timestamp.now(),
+        'docId': const Uuid().v4(),
         'isIncognito': isIncognito,
       })
       ..set(
@@ -53,6 +55,17 @@ class DatabaseRepository {
         },
       );
     await batch.commit();
+  }
+
+  Future<QuerySnapshot<Map<String, dynamic>>> fetchNextSearches(
+    final DocumentSnapshot lastDoc,
+  ) {
+    return _instance
+        .collection('searches')
+        .orderBy('timestamp', descending: true)
+        .limit(10)
+        .startAfterDocument(lastDoc)
+        .get();
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getWeatherSearches() {

@@ -7,7 +7,7 @@ part of 'database_repository.dart';
 // **************************************************************************
 
 String _$databaseRepositoryHash() =>
-    r'2254e135edbf27c8c01cf02532c8284c415810f8';
+    r'f00ab750a47f349466a68bee6dbb0a306565bf95';
 
 /// See also [databaseRepository].
 @ProviderFor(databaseRepository)

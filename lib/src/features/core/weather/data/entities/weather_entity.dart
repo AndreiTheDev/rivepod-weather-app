@@ -23,7 +23,7 @@ class WeatherEntity with _$WeatherEntity {
 
   factory WeatherEntity.fromData(
     final Map<String, dynamic> data,
-    final bool units,
+    final bool metricUnits,
   ) {
     final num temp = data['main']['temp'];
     final num feelsLike = data['main']['feels_like'];
@@ -43,7 +43,7 @@ class WeatherEntity with _$WeatherEntity {
       dateTime: dateTime,
       description: data['weather'][0]['description'],
       iconId: data['weather'][0]['id'] as int,
-      isMetricUnits: units,
+      isMetricUnits: metricUnits,
     );
   }
 

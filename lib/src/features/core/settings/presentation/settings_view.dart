@@ -160,7 +160,7 @@ class _SettingsViewState extends State<SettingsView> {
             height: 16,
           ),
           Text(
-            AppLocalizations.of(context)!.version('1.2.5'),
+            AppLocalizations.of(context)!.version('1.0.0'),
             textScaler: const TextScaler.linear(1.1),
           ),
           Text(

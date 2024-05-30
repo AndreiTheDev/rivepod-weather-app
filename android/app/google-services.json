@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:968914466902:android:f63985418f25ef383723f7",
+        "mobilesdk_app_id": "1:968914466902:android:42cb5a3325d595c53723f7",
         "android_client_info": {
-          "package_name": "com.example.weather_app_riverpod"
+          "package_name": "com.global_weather_searches"
         }
       },
       "oauth_client": [],

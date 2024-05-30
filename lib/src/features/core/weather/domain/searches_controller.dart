@@ -43,30 +43,8 @@ class SearchesState {
 class SearchesController extends _$SearchesController {
   @override
   Future<SearchesState> build() async {
-    final searchesStreamRecord = await ref.watch(searchesProvider.future);
-    final List<SearchModel> newSearchesList = searchesStreamRecord.$1;
-    DocumentSnapshot? lastDoc = searchesStreamRecord.$2;
-    final prevState = state.valueOrNull;
-
-    if (prevState == null) {
-      return SearchesState(
-        searchesList: newSearchesList,
-        lastDoc: lastDoc,
-      );
-    }
-
-    final updatedSearchesList = prevState.searchesList;
-    lastDoc = prevState.lastDoc;
-    for (final element in newSearchesList.reversed) {
-      if (!updatedSearchesList.contains(element)) {
-        updatedSearchesList.insert(0, element);
-      }
-    }
-
-    return SearchesState(
-      searchesList: updatedSearchesList,
-      lastDoc: lastDoc,
-    );
+    await initState();
+    return future;
   }
 
   Future<void> fetchNextSearches() async {
@@ -91,6 +69,38 @@ class SearchesController extends _$SearchesController {
     });
     state = AsyncData(
       SearchesState(searchesList: updatedSearchesList, lastDoc: lastDoc),
+    );
+  }
+
+  Future<void> initState() async {
+    final searchesStreamRecord = await ref.watch(searchesProvider.future);
+    final List<SearchModel> newSearchesList = searchesStreamRecord.$1;
+    DocumentSnapshot? lastDoc = searchesStreamRecord.$2;
+    final prevState = state.valueOrNull;
+
+    if (prevState == null) {
+      state = AsyncData(
+        SearchesState(
+          searchesList: newSearchesList,
+          lastDoc: lastDoc,
+        ),
+      );
+      return;
+    }
+
+    final updatedSearchesList = prevState.searchesList;
+    lastDoc = prevState.lastDoc;
+    for (final element in newSearchesList.reversed) {
+      if (!updatedSearchesList.contains(element)) {
+        updatedSearchesList.insert(0, element);
+      }
+    }
+
+    state = AsyncData(
+      SearchesState(
+        searchesList: updatedSearchesList,
+        lastDoc: lastDoc,
+      ),
     );
   }
 }

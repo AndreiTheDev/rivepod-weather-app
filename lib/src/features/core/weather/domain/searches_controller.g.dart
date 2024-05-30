@@ -22,7 +22,7 @@ final searchesProvider =
 
 typedef SearchesRef = StreamProviderRef<(List<SearchModel>, DocumentSnapshot)>;
 String _$searchesControllerHash() =>
-    r'58f3eada1430a309c1b2076e0db8116e0b3f1544';
+    r'eaec3ba3d52681d47e658527242670b42c265193';
 
 /// See also [SearchesController].
 @ProviderFor(SearchesController)

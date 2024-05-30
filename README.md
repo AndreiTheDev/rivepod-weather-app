@@ -1,16 +1,15 @@
-# weather_app_riverpod
+# GSWeather => Global Searches Weather
 
-A new Flutter project.
+- This weather app allows users to search for either current weather or 5 days forecast, all this time making there search globally available to other users.
 
-## Getting Started
+- Everyone can see where everyone is searching the weather.
 
-This project is a starting point for a Flutter application.
+- Anonymous search options in case user does not want to share her / his details.
 
-A few resources to get you started if this is your first Flutter project:
+- Friends functionality, you can add everyone you want as a friend.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- In the feature chat option with your friends.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Everything done with a cool design
+
+![App design](https://github.com/AndreiTheDev/rivepod-weather-app/blob/main/assets/designs/be40dff2-b202-4cb7-86bc-12c3ad53642d.jpg)

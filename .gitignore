@@ -51,4 +51,4 @@ firebase_emulator_data
 .vscode
 firebase.json
 ios/runner/GoogleService-Info.plist
-android/app/src/google-services.json
+android/app/google-services.json

@@ -1,136 +1,136 @@
 {
-    "signIn": "Sign In",
-    "@signIn": {
-        "description": "Text pointing out to user that he is on sign in page"
-    },
-    "signUp": "Sign Up",
-    "@signUp": {
-        "description": "Text pointing out to user that he is on sign up page"
-    },
-    "enterUsername": "Enter your username...",
-    "@enterUsername": {
-        "description": "Text pointing out to user that he needs to enter his username"
-    },
-    "enterEmail": "Enter your email...",
-    "@enterEmail": {
-        "description": "Text pointing out to user that he needs to enter his email"
-    },
-    "enterPassword": "Enter your password...",
-    "@enterPassword": {
-        "description": "Text pointing out to user that he needs to enter his password"
-    },
-    "recoverPassword": "Recover your password.",
-    "@recoverPassword": {
-        "description": "Text pointing out to user that he can recover his password"
-    },
-    "noAccount": "Don't have an account?",
-    "@noAccount": {
-        "description": "Text asking user if he does not have an account"
-    },
-    "alreadyAccount": "Already have an account?",
-    "@alreadyAccount": {
-        "description": "Text asking user if he already has an account"
-    },
-    "currentWeather": "Current Weather",
-    "@currentWeather": {
-        "description": "Text for searching for current weather"
-    },
-    "forecastWeather": "Forecast Weather",
-    "@forecastWeather": {
-        "description": "Text for searching for forecast weather"
-    },
-    "enterCity": "Enter city...",
-    "@enterCity": {
-        "description": "Input placeholder to let user know to enter city name"
-    },
-    "getWeather": "Get Weather",
-    "@getWeather": {
-        "description": "Let the user know he will get the weather"
-    },
-    "weather": "Weather",
-    "@weather": {
-        "description": "Placeholder for weather navigation button"
-    },
-    "searches": "Searches",
-    "@searches": {
-        "description": "Placeholder for searches navigation button"
-    },
-    "friends": "Friends",
-    "@friends": {
-        "description": "Placeholder for friends navigation button"
-    },
-    "signOut": "Sign Out",
-    "@signOut": {
-        "description": "Text for sign out button"
-    },
-    "settings": "Settings",
-    "@settings": {
-        "description": "Placeholder for settings navigation button"
-    },
-    "metricUnits": "Metric units",
-    "@metricUnits": {
-        "description": "Text for expressing metric units"
-    },
-    "incognitoMode": "Incognito Mode",
-    "@incognitoMode": {
-        "description": "Text for expressing incognito mode"
-    },
-    "notifications": "Notifications",
-    "@notifications": {
-        "description": "Text for expressing notifications"
-    },
-    "about": "About",
-    "@about": {
-        "description": "Text for expressing about"
-    },
-    "version": "Version: {number}",
-    "@version": {
-        "description": "Text for expressing version number",
-        "placeholders": {
-            "number": {
-                "type": "String",
-                "example": "1.2.5"
-            }
-        }
-    },
-    "authors": "Authors: {name}",
-    "@authors": {
-        "description": "Text for expressing app authors",
-        "placeholders": {
-            "name": {
-                "type": "String",
-                "example": "Emanuel Lamba"
-            }
-        }
-    },
-    "realFeel": "Real Feel: {temp}°",
-    "@realFeel": {
-        "description": "What temperature it feels like",
-        "placeholders": {
-            "temp": {
-                "type": "String",
-                "example": "-3"
-            }
-        }
-    },
-    "humidity": "Humidity",
-    "@humidity": {
-        "description": "What percentage of humidity there is"
-    },
-    "uvIndex": "UV Index",
-    "@uvIndex": {
-        "description": "What UV Index there is"
-    },
-    "windSpeed": "Wind Speed",
-    "@windSpeed": {
-        "description": "How fast the wind is"
-    },
-    "rainProbability": "Rain Probability",
-    "@rainProbability": {
-        "description": "What percentage of rain probability there is"
-    },
-    "pressure": "Pressure",
-    "@pressure": {
-        "description": "What pressure is in the air"
+  "signIn": "Sign In",
+  "@signIn": {
+    "description": "Text pointing out to user that he is on sign in page"
+  },
+  "signUp": "Sign Up",
+  "@signUp": {
+    "description": "Text pointing out to user that he is on sign up page"
+  },
+  "enterUsername": "Enter your username...",
+  "@enterUsername": {
+    "description": "Text pointing out to user that he needs to enter his username"
+  },
+  "enterEmail": "Enter your email...",
+  "@enterEmail": {
+    "description": "Text pointing out to user that he needs to enter his email"
+  },
+  "enterPassword": "Enter your password...",
+  "@enterPassword": {
+    "description": "Text pointing out to user that he needs to enter his password"
+  },
+  "recoverPassword": "Recover your password",
+  "@recoverPassword": {
+    "description": "Text pointing out to user that he can recover his password"
+  },
+  "noAccount": "Don't have an account?",
+  "@noAccount": {
+    "description": "Text asking user if he does not have an account"
+  },
+  "alreadyAccount": "Already have an account?",
+  "@alreadyAccount": {
+    "description": "Text asking user if he already has an account"
+  },
+  "currentWeather": "Current Weather",
+  "@currentWeather": {
+    "description": "Text for searching for current weather"
+  },
+  "forecastWeather": "Forecast Weather",
+  "@forecastWeather": {
+    "description": "Text for searching for forecast weather"
+  },
+  "enterCity": "Enter city...",
+  "@enterCity": {
+    "description": "Input placeholder to let user know to enter city name"
+  },
+  "getWeather": "Get Weather",
+  "@getWeather": {
+    "description": "Let the user know he will get the weather"
+  },
+  "weather": "Weather",
+  "@weather": {
+    "description": "Placeholder for weather navigation button"
+  },
+  "searches": "Searches",
+  "@searches": {
+    "description": "Placeholder for searches navigation button"
+  },
+  "friends": "Friends",
+  "@friends": {
+    "description": "Placeholder for friends navigation button"
+  },
+  "signOut": "Sign Out",
+  "@signOut": {
+    "description": "Text for sign out button"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Placeholder for settings navigation button"
+  },
+  "metricUnits": "Metric units",
+  "@metricUnits": {
+    "description": "Text for expressing metric units"
+  },
+  "incognitoMode": "Incognito Mode",
+  "@incognitoMode": {
+    "description": "Text for expressing incognito mode"
+  },
+  "notifications": "Notifications",
+  "@notifications": {
+    "description": "Text for expressing notifications"
+  },
+  "about": "About",
+  "@about": {
+    "description": "Text for expressing about"
+  },
+  "version": "Version: {number}",
+  "@version": {
+    "description": "Text for expressing version number",
+    "placeholders": {
+      "number": {
+        "type": "String",
+        "example": "1.2.5"
+      }
     }
+  },
+  "authors": "Authors: {name}",
+  "@authors": {
+    "description": "Text for expressing app authors",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Emanuel Lamba"
+      }
+    }
+  },
+  "realFeel": "Real Feel: {temp}°",
+  "@realFeel": {
+    "description": "What temperature it feels like",
+    "placeholders": {
+      "temp": {
+        "type": "String",
+        "example": "-3"
+      }
+    }
+  },
+  "humidity": "Humidity",
+  "@humidity": {
+    "description": "What percentage of humidity there is"
+  },
+  "uvIndex": "UV Index",
+  "@uvIndex": {
+    "description": "What UV Index there is"
+  },
+  "windSpeed": "Wind Speed",
+  "@windSpeed": {
+    "description": "How fast the wind is"
+  },
+  "rainProbability": "Rain Probability",
+  "@rainProbability": {
+    "description": "What percentage of rain probability there is"
+  },
+  "pressure": "Pressure",
+  "@pressure": {
+    "description": "What pressure is in the air"
+  }
 }

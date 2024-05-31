@@ -108,6 +108,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
                         .get5DaysForecast(controller.text);
                   }
                   controller.clear();
+                  FocusManager.instance.primaryFocus?.unfocus();
                 }
               },
               child: Text(AppLocalizations.of(context)!.getWeather),

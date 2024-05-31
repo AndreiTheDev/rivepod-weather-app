@@ -1,8 +1,11 @@
+// ignore_for_file: avoid_manual_providers_as_generated_provider_dependency
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../authentication/domain/auth_controller.dart';
+import '../../error_handling/logger.dart';
 
 part 'notifications_controller.g.dart';
 
@@ -23,6 +26,7 @@ class NotificationsController {
   final _messagingInstance = FirebaseMessaging.instance;
   final _firestoreInstance = FirebaseFirestore.instance;
   final NotificationsControllerRef _ref;
+  final Logger _logger = getLogger(NotificationsController);
 
   Future<void> init() async {
     final authState = _ref.read(authStateProvider);
@@ -31,6 +35,7 @@ class NotificationsController {
 
   Future<void> sendFcmToken(final AuthState auth) async {
     try {
+      _logger.d('sendFcmToken - call');
       await _messagingInstance.requestPermission();
 
       final fcmToken = await _messagingInstance.getToken();
@@ -42,7 +47,7 @@ class NotificationsController {
             .update({'fcmToken': fcmToken});
       }
     } on Exception {
-      print('notifications error');
+      _logger.e('sendFcmToken - exception');
     }
   }
 }

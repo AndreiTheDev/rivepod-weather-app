@@ -30,7 +30,7 @@ class ResultContainer extends StatelessWidget {
             height: 24,
           ),
           Text(
-            '${weather.dateTime.day} Jan ${weather.dateTime.year}',
+            '${weather.dateTime.day} ${weather.dateTime.month} ${weather.dateTime.year}',
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w400,

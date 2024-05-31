@@ -1,4 +1,4 @@
-package com.example.weather_app_riverpod
+package com.global_weather_searches
 
 import io.flutter.embedding.android.FlutterActivity
 

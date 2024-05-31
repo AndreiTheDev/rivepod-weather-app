@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../../../utils/constants.dart';
 import '../../../authentication/domain/models/user_model.dart';
 import 'entities/friend_entity.dart';
 
@@ -29,11 +30,7 @@ class FriendsRepository {
         await acceptFriend(currUser, friendEntity);
         return;
       }
-      await _functionsInstance
-          .httpsCallableFromUrl(
-        'https://europe-west1-riverpod-weather-app.cloudfunctions.net/addFriend',
-      )
-          .call(
+      await _functionsInstance.httpsCallableFromUrl(kAddFriendUrl).call(
         {
           'currentUser': currUser.toDatabase(),
           'friend': friendEntity.toDatabase(),
@@ -48,14 +45,9 @@ class FriendsRepository {
   ) async {
     if (currUser.uid != friendEntity.uid) {
       if (await hasFriendRequest(currUser.uid, friendEntity.uid)) {
-        // await acceptFriend(currUser, friendEntity);
         return;
       }
-      await _functionsInstance
-          .httpsCallableFromUrl(
-        'https://europe-west1-riverpod-weather-app.cloudfunctions.net/deleteFriend',
-      )
-          .call({
+      await _functionsInstance.httpsCallableFromUrl(kDeleteFriendUrl).call({
         'currentUser': currUser.toDatabase(),
         'friend': friendEntity.toDatabase(),
       });
@@ -92,11 +84,7 @@ class FriendsRepository {
     final FriendEntity friendEntity,
   ) async {
     if (currUser.uid != friendEntity.uid) {
-      await _functionsInstance
-          .httpsCallableFromUrl(
-        'https://europe-west1-riverpod-weather-app.cloudfunctions.net/rejectFriend',
-      )
-          .call({
+      await _functionsInstance.httpsCallableFromUrl(kRejectFriendUrl).call({
         'currentUser': currUser.toDatabase(),
         'friend': friendEntity.toDatabase(),
       });

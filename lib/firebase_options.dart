@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBiuvocorzwOFBkXx4DKYx0E9LHtu9fhwQ',
-    appId: '1:968914466902:android:f63985418f25ef383723f7',
+    appId: '1:968914466902:android:42cb5a3325d595c53723f7',
     messagingSenderId: '968914466902',
     projectId: 'riverpod-weather-app',
     storageBucket: 'riverpod-weather-app.appspot.com',
@@ -59,10 +59,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyApwb0vFB_dZhn3UOiNhC2uASB29C6C7Ck',
-    appId: '1:968914466902:ios:2aa36f94f84214d63723f7',
+    appId: '1:968914466902:ios:7bb1e9ee0ece79ed3723f7',
     messagingSenderId: '968914466902',
     projectId: 'riverpod-weather-app',
     storageBucket: 'riverpod-weather-app.appspot.com',
-    iosBundleId: 'com.example.weatherAppRiverpod',
+    iosBundleId: 'com.globalWeatherSearches',
   );
+
 }

@@ -44,7 +44,11 @@ app.*.map.json
 /android/app/release
 
 # Ignores
-lib/src/utils/api_keys.dart
+lib/src/utils/constants.dart
+lib/src/features/core/searches
 assets/designs
 firebase_emulator_data
 .vscode
+firebase.json
+ios/runner/GoogleService-Info.plist
+android/app/google-services.json

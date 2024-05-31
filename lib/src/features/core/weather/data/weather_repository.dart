@@ -3,7 +3,7 @@
 import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../../utils/api_keys.dart';
+import '../../../../utils/constants.dart';
 import '../../error_handling/logger.dart';
 import 'entities/weather_entity.dart';
 
@@ -27,7 +27,7 @@ class WeatherRepository {
       queryParameters: <String, dynamic>{
         'q': city,
         'units': units,
-        'appid': openWeatherKey,
+        'appid': kOpenWeatherKey,
       },
     );
     if (response.data == null) {
@@ -52,7 +52,7 @@ class WeatherRepository {
       queryParameters: <String, dynamic>{
         'q': city,
         'units': units,
-        'appid': openWeatherKey,
+        'appid': kOpenWeatherKey,
       },
     );
 

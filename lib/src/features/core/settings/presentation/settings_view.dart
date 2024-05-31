@@ -164,7 +164,7 @@ class _SettingsViewState extends State<SettingsView> {
             textScaler: const TextScaler.linear(1.1),
           ),
           Text(
-            AppLocalizations.of(context)!.authors('Emanuel Lamba'),
+            AppLocalizations.of(context)!.authors('AndreiTheDev'),
             textScaler: const TextScaler.linear(1.1),
           ),
           RichText(

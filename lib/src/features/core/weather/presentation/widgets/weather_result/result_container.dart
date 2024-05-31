@@ -3,6 +3,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../settings/domain/user_prefs_controller.dart';
 import '../../../domain/models/weather.dart';
@@ -15,6 +16,7 @@ class ResultContainer extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
+    final dateFormatter = DateFormat.yMMMd();
     return SizedBox(
       width: MediaQuery.of(context).size.width - 56,
       child: Column(
@@ -30,7 +32,7 @@ class ResultContainer extends StatelessWidget {
             height: 24,
           ),
           Text(
-            '${weather.dateTime.day} ${weather.dateTime.month} ${weather.dateTime.year}',
+            dateFormatter.format(weather.dateTime),
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w400,

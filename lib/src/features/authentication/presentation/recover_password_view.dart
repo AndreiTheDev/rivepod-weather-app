@@ -110,7 +110,7 @@ class RecoverPasswordViewState extends ConsumerState<RecoverPasswordView> {
                 context.go('/signin');
               },
               child: Text(
-                'Go back to ${AppLocalizations.of(context)!.signIn}',
+                AppLocalizations.of(context)!.signIn,
                 style: const TextStyle(fontSize: 16),
               ),
             ),
